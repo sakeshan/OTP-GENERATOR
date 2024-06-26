@@ -1,0 +1,33 @@
+import random
+import re
+
+def generate_otp(length): 
+    otp = ""
+    for _ in range(length): 
+        otp += str(random.randint(0, 9))
+    return otp
+
+def validate_otp(user_input, otp):
+    return user_input == otp
+
+def validate_email(email):
+    # Regular expression pattern for email validation
+    pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    return re.match(pattern, email) is not None
+
+length = 5  # Length of the OTP
+
+otp = generate_otp(length)
+print("Generated OTP:", otp)
+
+email = input("Enter your email ID: ")
+
+if validate_email(email):
+    print("Email ID is valid!")
+    user_input = input("Enter the OTP: ")
+    if validate_otp(user_input, otp):
+        print("OTP is valid!")
+    else:
+        print("OTP is invalid!")
+else:
+    print("Invalid email ID format!")
